@@ -1,0 +1,46 @@
+from tkinter import *
+import calendar
+root = Tk()
+root.geometry('400x300')
+root.title('Calendário personalizado')
+root.resizable(False,False)
+root.configure(bg="#89cff0")
+def clear():
+    ano_entrada.delete(0, END)
+    mes_entrada.delete(0, END)
+    cal.delete(0, END)
+def exit():
+    root.destroy()
+def mostrar():
+    m = mes.get()
+    y = ano.get()
+    if m <= 12:
+        output = calendar.month(y, m)
+        cal.insert('end', output)
+    else:
+        output ='O mês não existe'
+        cal.insert('end', output)
+# Texto
+cal = Text(width=33, height=8, relief=RIDGE, borderwidth=2)
+cal.place(relx=0.2, rely=0.35)
+# mês
+mes_label = Label( text="Mês", font=('Arial', '10', 'bold'),bg="#89cff0",fg='black')
+mes_label.place(relx=0.2, rely=0.2)
+mes = IntVar()
+mes_entrada = Entry(textvariable=mes,justify="center")
+mes_entrada.place(relx=0.3, rely=0.2, relwidth=0.1)
+# Ano
+ano_label = Label( text="Ano", font=('Arial', '10', 'bold'),bg="#89cff0",fg='black')
+ano_label.place(relx=0.5, rely=0.2)
+ano = IntVar()
+ano_entrada = Entry(textvariable=ano,justify="center")
+ano_entrada.place(relx=0.6, rely=0.2, relwidth=0.15)
+# Butão
+#mostrar
+mostrarb = Button( text="Mostrar", font=('verdana', 10, 'bold'), command=mostrar)
+mostrarb.place(relx=0.3,rely=0.85)
+limparb = Button( text="Limpar", font=('verdana', 10, 'bold'), command=clear)
+limparb.place(relx=0.5,rely=0.85)
+exitb = Button(root, text="Exit", font=('verdana', 10, 'bold'), command=exit)
+exitb.place(relx=0.7,rely=0.85)
+root.mainloop()
